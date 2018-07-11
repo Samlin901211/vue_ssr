@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import 'es6-promise/auto'
 import { createApp } from './app'
-import ProgressBar from './components/ProgressBar.vue'
 
-// global progress bar
-const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
-document.body.appendChild(bar.$el)
+import './css/base.css';
+import './css/index.css';
+import './css/m.css';
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
@@ -23,9 +22,6 @@ Vue.mixin({
 })
 
 const { app, router, store } = createApp()
-
-
-import './vendor/skel.util.js';
 
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.

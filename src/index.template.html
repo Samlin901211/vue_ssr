@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>{{ title }}</title>
-    <meta charset="utf-8">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="apple-touch-icon" sizes="120x120" href="/public/logo-120.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <link rel="shortcut icon" sizes="48x48" href="/public/logo-48.png">
-    <meta name="theme-color" content="#f60">
-    <link rel="manifest" href="/manifest.json">
-    <style>
-      #skip a {  position:absolute;  left:-10000px;  top:auto;  width:1px;  height:1px;  overflow:hidden;  }
-      #skip a:focus {  position:static;  width:auto;  height:auto;  }
-    </style>
-  </head>
-  <body>
-      <i class="fa fa-close">123123</i>
-  <div id="skip"><a href="#app">skip to content</a></div>
-  <script src="//y.gtimg.cn/mediastyle/global/js/jquery.min.js?max_age=604800"></script>
-    <script src="//cdn.bootcss.com/skel/3.0.1/skel.min.js"></script>
-  <!--vue-ssr-outlet-->
-  </body>
+<html>
+<head>
+<meta charset="utf8">
+<title>首页_杨青个人博客 - 一个站在web前端设计之路的女技术员个人博客网站</title>
+<meta name="keywords" content="个人博客,杨青个人博客,个人博客模板,杨青" />
+<meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="/manifest.json">
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="app">
+<script src="//libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<!--vue-ssr-outlet-->
+</body>
 </html>
+

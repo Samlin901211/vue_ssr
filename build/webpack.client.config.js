@@ -3,34 +3,56 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const SWPrecachePlugin = require('sw-precache-webpack-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = merge(base, {
   entry: {
-    app: './src/entry-client.js'
+    app: './src/entry-client.js',
+    blogjs: ['./src/js/jquery.easyfader.min.js','./src/js/hc-sticky.js','./src/js/comm.js','./src/js/scrollReveal.js']
   },
   resolve: {
     alias: {
       'create-api': './create-api-client.js'
     }
   },
+  externals: {
+    jquery: 'jQuery',
+    vue: 'Vue'
+  },
   plugins: [
+    // new BundleAnalyzerPlugin(),
     // strip dev-only code in Vue source
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"'
     }),
     // extract vendor chunks for better caching
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: function (module) {
+    //     // a module is extracted into the vendor chunk if...
+    //     return (
+    //       // it's inside node_modules
+    //       /node_modules/.test(module.context) &&
+    //       // and not a CSS file (due to extract-text-webpack-plugin limitation)
+    //       !/\.css$/.test(module.request)
+    //     )
+    //   }
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        // a module is extracted into the vendor chunk if...
-        return (
-          // it's inside node_modules
-          /node_modules/.test(module.context) &&
-          // and not a CSS file (due to extract-text-webpack-plugin limitation)
-          !/\.css$/.test(module.request)
-        )
-      }
+      name: 'ventor',
+      minChunks: ({ resource }) => (
+        resource &&
+        resource.indexOf('node_modules') >= 0 &&
+        resource.match(/\.js$/)
+      )
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'used-twice',
+      minChunks: (module, count) => (
+        count >= 2
+      ),
     }),
     // extract webpack runtime & manifest to avoid vendor chunk hash changing
     // on every build.
